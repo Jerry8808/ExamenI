@@ -1,0 +1,46 @@
+﻿@page
+@model WebApplicationCore.Pages.Examen.EditTituloModel
+@{
+}
+
+<div id="AppEdit" class="container">
+    <div class="card">
+        <div class="card-header">
+            <!-- Valiadacion del formulario por funcion Si para verificar si el proceso es nuevo o es actualizar -->
+            @(Model.id.HasValue ? "Actualizar": "Nuevo")
+        </div>
+        <div class="card-body">
+            <form id="FormEdit" method="post">
+                <!-- Llamamiento escondido al campo ID -->
+                <input type="hidden" asp-for="Entity.Id_Titulo" />
+
+                <div class="form-group mb-3">
+                    <label for="Entity.Descripcion" class="form-label">Descripcion</label>
+                    <!-- Campo y espacio para agregar las opciones escritas-->
+                    <input type="text" class="form-control" asp-for="Entity.Descripcion" maxlength="250" required>
+                </div>
+
+                <div class="form-group form-check form-switch">
+                    <input type="checkbox" class="form-check-input" asp-for="Entity.Estado" value="true">
+                    <label for="Entity.Estado" class="form-check-label"> </label>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <!-- Llamamiento a la accion del boton agregar, y nuevamente cambia el label del texto dependiento si tiene o no un registro agregado -->
+                        <button type="submit" class="btn btn-outline-primary">
+                            @(Model.id.HasValue?"Actualizar":"Agregar")
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <!-- Llamamiento a la accion TypeScript que contiene la accion de abrir el nuevo formulario Editar -->
+    <script defer src="~/App/Examen/EditTitulo.js"></script>
+}
